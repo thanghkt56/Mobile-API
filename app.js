@@ -6,7 +6,7 @@ const xss = require("xss-clean");
 const cors = require("cors");
 const app = express();
 require("dotenv").config();
-
+/*
 const whitelist = process.env.ACCESS_CONTROL_ALLOW_ORIGIN.split(",");
 const corsOptions = {
   origin: function (origin, callback) {
@@ -18,10 +18,10 @@ const corsOptions = {
     }
   },
   credentials: true,
-};
+};*/
 
 //app use
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(helmet());
