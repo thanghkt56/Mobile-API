@@ -1,6 +1,7 @@
 const Ticket = require('./../models/ticket');
 const sendRes = require("../utils/send-res");
-
+const genSig = require("../utils/signature");
+const axios = require('axios');
 
 exports.getAllTicket = async (req, res, next) => {
     try {
@@ -22,4 +23,21 @@ exports.addTicket = async (req, res, next) => {
         //console.log(err);
         return sendRes.resError(res, "Save ticket failed");
     }
+};
+exports.sellTicket = async (req, res, next) => {
+    try {
+        const doc = await Ticket.findOneAndDelete({ticketId:req.body.ticketId})
+        if (!doc) {
+            return sendRes.resError(res, "Invalid ticketId");
+        }
+        let Signature = genSig.genSignature(doc.txid);
+        let c_res = await axios.post('http://34.71.245.146/transaction', {
+            txOutId: doc.txid,
+            address: req.body.address,
+            signature: Signature
+        });
+        return sendRes.resSuccess(res, doc);
+    } catch (err) {
+        return sendRes.resError(res, "Something's wrong");
+    };
 };

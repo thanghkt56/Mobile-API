@@ -3,7 +3,9 @@ const ticket = require('../models/ticket');
 const ticketController = require("./../controllers/ticket-controller");
 const router = express.Router();
 
-router.get('/', ticketController.getAllTicket);
-router.post('/', ticketController.addTicket);
+router.route('/')
+    .get(ticketController.getAllTicket)
+    .post(ticketController.addTicket)
+    .patch(ticketController.sellTicket);
 
 module.exports = router;
