@@ -4,7 +4,7 @@ const sendRes = require("../utils/send-res");
 
 exports.getAllTicket = async (req, res, next) => {
     try {
-        const doc = await Ticket.find().select('-__v');
+        const doc = await Ticket.find().select('-__v -txid ');
         if (!doc) {
             return sendRes.resError(res, "No ticket for sale");
         }
