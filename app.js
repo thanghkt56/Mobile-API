@@ -30,9 +30,9 @@ app.use(xss());
 
 //routes
 const imageRoute = require("./routes/image-route");
-
+const ticketRoute = require("./routes/ticket-route");
 
 app.use("/api/v1/image/", imageRoute);
-
+app.use("/api/v1/ticket/", ticketRoute);
 
 module.exports = app;
