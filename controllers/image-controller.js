@@ -4,7 +4,7 @@ const sendRes = require("../utils/send-res");
 
 exports.getImage = async (req, res, next) => {
     try {
-        const doc = await Image.findOne({ticket: req.params.id},'path');
+        const doc = await Image.findOne({ticketId: req.params.id},'-ticketId');
         if (!doc) {
             return sendRes.resError(res, "Missing ticket");
         }

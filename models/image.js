@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
 const imageSchema= new mongoose.Schema({
-    ticket: {
+    ticketId: {
         type: String,
-        required: [true, "ticket required"]
+        required: [true, "ticketId required"]
     },
-    path: {
+    imageUrl: {
         type: String,
-        required: [true, "path required"]
-    }},
+        required: [true, "Url required"]
+    },
+    event_name: String
+    },
+
     {timestamps: true}
 );
 
