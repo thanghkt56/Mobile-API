@@ -5,7 +5,16 @@ const axios = require('axios');
 
 exports.getAllTicket = async (req, res, next) => {
     try {
-        const doc = await Ticket.find().select('-__v');
+        const doc = await Ticket.aggregate([
+            { "$group": { 
+              "_id": "$name", 
+              "doc": { "$first": "$$ROOT" }
+            }},
+            { "$replaceRoot": {
+              "newRoot": "$doc"
+            }}
+          ])
+        //const doc = await Ticket.find().select('-__v');
         if (!doc) {
             return sendRes.resError(res, "No ticket for sale");
         }
