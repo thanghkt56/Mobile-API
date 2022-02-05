@@ -6,7 +6,7 @@ exports.getImage = async (req, res, next) => {
     try {
         const doc = await Image.findOne({ticketId: req.params.id},'-ticketId');
         if (!doc) {
-            return sendRes.resError(res, "Missing ticket");
+            return sendRes.resSuccess(res, {imageUrl: process.env.SKE_IMG});
         }
         return sendRes.resSuccess(res, doc);   
     } catch (err) {
