@@ -2,6 +2,10 @@
 ```
 make
 ```
+Stop api
+```
+npm start
+```
 # Working with stack
 ## Viewing logs
 ```
